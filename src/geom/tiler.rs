@@ -225,13 +225,19 @@ impl Tiler {
         if outlines.is_empty()
             && self.containment_mode == ContainmentMode::Covers
         {
-            let centroid = self.geom.centroid().expect("centroid");
-            return Either::Left(std::iter::once(AnnotatedCell {
-                cell: LatLng::from_radians(centroid.y(), centroid.x())
-                    .expect("valid coordinate")
-                    .to_cell(self.resolution),
-                is_fully_contained: false,
-            }));
+            // If the geometry is empty, centroid returns `None` so we need to
+            // handle it.
+            return Either::Left(
+                self.geom
+                    .centroid()
+                    .map(|centroid| AnnotatedCell {
+                        cell: LatLng::from_radians(centroid.y(), centroid.x())
+                            .expect("valid coordinate")
+                            .to_cell(self.resolution),
+                        is_fully_contained: false,
+                    })
+                    .into_iter(),
+            );
         }
 
         // Next, compute the outermost layer of inner cells to seed the

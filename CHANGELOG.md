@@ -14,11 +14,16 @@ Possible sections are:
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+### Fixed
+
+- `Tiler::into_coverage` and `Tiler::into_annotated_coverage` no longer panic on
+  an empty geometry when the containment mode is `Covers`.
+
 ### Changed
 
 - `h3o::geom::Solvent` uses a new algorithm for heterogeneous input (up to 133x
   less RAM and 82x faster compared to the homogeneous version, 55x less RAM and
-  50x faster compared to the previous heterogeneous implementation)
+  50x faster compared to the previous heterogeneous implementation).
 
 ### Removed
 
