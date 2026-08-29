@@ -14,6 +14,8 @@ Possible sections are:
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+## [0.11.0] - 2026-08-29
+
 ### Fixed
 
 - `Tiler::into_coverage` and `Tiler::into_annotated_coverage` no longer panic on
